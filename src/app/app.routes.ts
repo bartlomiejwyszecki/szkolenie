@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -14,6 +15,7 @@ export const routes: Routes = [
       import('./features/employees/employees.component').then(
         (c) => c.EmployeesComponent
       ),
+    providers: [TitleCasePipe],
   },
   {
     path: '',
