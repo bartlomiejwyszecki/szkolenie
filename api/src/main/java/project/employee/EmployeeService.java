@@ -16,6 +16,10 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
@@ -24,7 +28,6 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    // Update an existing employee
     public Optional<Employee> updateEmployee(UUID id, Employee employee) {
         if (employeeRepository.existsById(id)) {
             return Optional.of(employeeRepository.save(employee));
@@ -33,7 +36,6 @@ public class EmployeeService {
         return Optional.empty();
     }
 
-    // Delete employee by id
     public boolean deleteEmployee(UUID id) {
         if (employeeRepository.existsById(id)) {
             employeeRepository.deleteById(id);
