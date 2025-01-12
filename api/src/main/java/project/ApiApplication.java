@@ -15,12 +15,6 @@ public class ApiApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ApiApplication.class, args);
-
-        var welcomeMessage = new Employee();
-
-        System.out.println(welcomeMessage.getWelcomeMessage());
-
-        logger.info("Something changed!");
     }
 
     @Bean
