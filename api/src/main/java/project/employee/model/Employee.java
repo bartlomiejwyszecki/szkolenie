@@ -1,8 +1,7 @@
-package project.employee;
+package project.employee.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-
-import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +17,9 @@ import lombok.NoArgsConstructor;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
 
+    @Schema(description = "The first name of the employee", example = "John")
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
@@ -32,6 +32,7 @@ public class Employee {
     @Column()
     private String department;
 
+    @Schema(hidden = true)
     public String getFullName() {
         return firstName + " " + lastName;
     }
