@@ -2,6 +2,7 @@ package project.employee.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.employee.dto.CreateEmployeeDTO;
 import project.employee.model.Employee;
 import project.employee.repository.EmployeeRepository;
 
@@ -17,7 +18,14 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public Employee createEmployee(Employee employee) {
+    public Employee createEmployee(CreateEmployeeDTO createEmployeeDTO) {
+        Employee employee = Employee.builder()
+                .firstName(createEmployeeDTO.getFirstName())
+                .lastName(createEmployeeDTO.getLastName())
+                .department(createEmployeeDTO.getDepartment())
+                .email(createEmployeeDTO.getEmail())
+                .build();
+
         return employeeRepository.save(employee);
     }
 
