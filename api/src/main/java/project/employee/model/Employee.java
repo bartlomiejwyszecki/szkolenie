@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "employees")
 @Data
@@ -16,8 +18,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @Schema(description = "The first name of the employee", example = "John")
     @Column(name = "first_name", nullable = false)
@@ -33,7 +35,7 @@ public class Employee {
     private String department;
 
     @Column(nullable = false)
-    private Double salary;
+    private Double salary = 0.0;
 
     @Schema(hidden = true)
     public String getFullName() {

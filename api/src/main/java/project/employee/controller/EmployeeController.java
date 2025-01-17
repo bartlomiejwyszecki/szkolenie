@@ -10,6 +10,7 @@ import project.employee.service.EmployeeService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/employees")
@@ -34,7 +35,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable UUID id) {
         Optional<Employee> employee = employeeService.getEmployeeById(id);
 
         return employee.map(ResponseEntity::ok)
@@ -42,7 +43,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable UUID id, @RequestBody Employee employee) {
         Optional<Employee> updatedEmployee = employeeService.updateEmployee(id, employee);
 
         return updatedEmployee.map(ResponseEntity::ok)
@@ -50,7 +51,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteEmployee(@PathVariable UUID id) {
         if (employeeService.deleteEmployee(id)) {
             return ResponseEntity.noContent().build();
         } else {
