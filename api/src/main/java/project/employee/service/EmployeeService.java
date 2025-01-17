@@ -24,6 +24,7 @@ public class EmployeeService {
                 .lastName(createEmployeeDTO.getLastName())
                 .department(createEmployeeDTO.getDepartment())
                 .email(createEmployeeDTO.getEmail())
+                .salary(createEmployeeDTO.getSalary())
                 .build();
 
         return employeeRepository.save(employee);

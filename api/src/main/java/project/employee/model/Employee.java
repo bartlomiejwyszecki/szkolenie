@@ -32,6 +32,9 @@ public class Employee {
     @Column()
     private String department;
 
+    @Column(nullable = false)
+    private Double salary;
+
     @Schema(hidden = true)
     public String getFullName() {
         return firstName + " " + lastName;
