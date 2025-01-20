@@ -9,4 +9,12 @@ public class CreateEmployeeDTO {
     private String department;
     private String email;
     private Double salary;
+
+    public CreateEmployeeDTO(String firstName, String lastName, String email, String department, Double salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.department = department;
+        this.salary = salary;
+    }
 }
