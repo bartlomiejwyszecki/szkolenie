@@ -1,6 +1,7 @@
 package project.auth.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
@@ -26,18 +27,23 @@ public class User {
     private UUID id;
 
     @Column(nullable = false, unique = true)
+    @NotBlank(message = "Email cannot be blank")
+    @Email()
     private String email;
 
     @Column(nullable = false)
-    @NotBlank(message = "Password cannot be blank")
+    @NotBlank(message = "Passwrod cannot be blank")
     @Size(min = 8, message = "Password must be at least 8 characters long")
     @JsonIgnore
     private String password;
 
-    @Column(nullable = false)
+    @Column()
+    private String userName;
+
+    @Column()
     private String name;
 
-    @Column(nullable = false)
+    @Column()
     private String surname;
 
     @Enumerated(EnumType.STRING)
@@ -49,6 +55,6 @@ public class User {
     private LocalDate dateOfBirth;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column()
     private Sex sex;
 }
