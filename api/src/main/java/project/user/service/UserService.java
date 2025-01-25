@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
+import project.user.dto.UpdateUserDTO;
+import project.user.exception.UserNotFoundException;
+import project.user.exception.UsernameAlreadyExistsException;
 import project.user.model.User;
 import project.user.repository.UserRepository;
 
@@ -27,28 +27,33 @@ public class UserService {
 
     public User getUserById(UUID id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User with " + id + " not found."));
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public User updateUser(String id, UpdateUserDTO updateUserDTO) {
+    public User updateUser(UUID id, UpdateUserDTO updateUserDTO) {
         User existingUser = getUserById(id);
-        if (updateUserDTO.getEmail() != null) {
-            existingUser.setEmail(updateUserDTO.getEmail());
+
+        if ((existingUser.getUserName() != updateUserDTO.getUserName())
+                && userRepository.existsByUsername(updateUserDTO.getUserName())) {
+            throw new UsernameAlreadyExistsException(updateUserDTO.getUserName());
+        } else {
+            existingUser.setUserName(updateUserDTO.getUserName());
         }
-        if (updateUserDTO.getRole() != null) {
-            existingUser.setRole(updateUserDTO.getRole());
-        }
+
         if (updateUserDTO.getSex() != null) {
             existingUser.setSex(updateUserDTO.getSex());
         }
+
         return userRepository.save(existingUser);
     }
 
-    public boolean deleteUser(String id) {
+    public boolean deleteUser(UUID id) {
         if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException("User with id " + id + " not found");
+            throw new UserNotFoundException(id);
         }
+
         userRepository.deleteById(id);
+
         return true;
     }
 }
