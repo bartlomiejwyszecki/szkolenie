@@ -1,4 +1,4 @@
-package project.auth.model;
+package project.user.model;
 
 public enum Role {
     USER,

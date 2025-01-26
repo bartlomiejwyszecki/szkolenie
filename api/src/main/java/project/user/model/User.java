@@ -1,4 +1,4 @@
-package project.auth.model;
+package project.user.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -38,7 +38,7 @@ public class User {
     private String password;
 
     @Column()
-    private String userName;
+    private String username;
 
     @Column()
     private String name;

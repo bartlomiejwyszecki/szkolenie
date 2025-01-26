@@ -25,19 +25,19 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public User getUserById(UUID id) {
+    public User getById(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public User updateUser(UUID id, UpdateUserDTO updateUserDTO) {
-        User existingUser = getUserById(id);
+    public User update(UUID id, UpdateUserDTO updateUserDTO) {
+        User existingUser = getById(id);
 
-        if ((existingUser.getUserName() != updateUserDTO.getUserName())
-                && userRepository.existsByUsername(updateUserDTO.getUserName())) {
-            throw new UsernameAlreadyExistsException(updateUserDTO.getUserName());
+        if ((existingUser.getUsername() != updateUserDTO.getUsername())
+                && (userRepository.existsByUsername(updateUserDTO.getUsername()))) {
+            throw new UsernameAlreadyExistsException(updateUserDTO.getUsername());
         } else {
-            existingUser.setUserName(updateUserDTO.getUserName());
+            existingUser.setUsername(updateUserDTO.getUsername());
         }
 
         if (updateUserDTO.getSex() != null) {
@@ -47,7 +47,7 @@ public class UserService {
         return userRepository.save(existingUser);
     }
 
-    public boolean deleteUser(UUID id) {
+    public boolean delete(UUID id) {
         if (!userRepository.existsById(id)) {
             throw new UserNotFoundException(id);
         }
