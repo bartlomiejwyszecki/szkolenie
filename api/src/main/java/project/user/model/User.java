@@ -50,7 +50,7 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    @Column(name = "date_of_birth", nullable = false)
+    @Column(name = "date_of_birth")
     @Past()
     private LocalDate dateOfBirth;
 

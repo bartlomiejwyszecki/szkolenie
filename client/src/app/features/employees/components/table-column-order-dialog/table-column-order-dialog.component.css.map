@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "table-column-order-dialog.component.scss"
+    ],
+    "names": [],
+    "file": "table-column-order-dialog.component.css"
+}
