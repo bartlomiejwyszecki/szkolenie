@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.user.dto.UpdateUserDTO;
+import project.user.exception.EmailAlreadyExistsException;
 import project.user.exception.UserNotFoundException;
 import project.user.exception.UsernameAlreadyExistsException;
 import project.user.model.User;
@@ -19,6 +20,19 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    public User create(User user)
+    {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new UsernameAlreadyExistsException(user.getUsername());
+        }
+
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new EmailAlreadyExistsException(user.getEmail());
+        }
+
+        return userRepository.save(user);
     }
 
     public List<User> getAll() {

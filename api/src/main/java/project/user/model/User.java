@@ -37,6 +37,10 @@ public class User {
     @JsonIgnore
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
     @Column()
     private String username;
 
@@ -45,10 +49,6 @@ public class User {
 
     @Column()
     private String surname;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
 
     @Column(name = "date_of_birth")
     @Past()

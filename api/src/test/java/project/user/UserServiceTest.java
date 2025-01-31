@@ -21,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import project.user.dto.UpdateUserDTO;
+import project.user.exception.EmailAlreadyExistsException;
 import project.user.exception.UserNotFoundException;
 import project.user.exception.UsernameAlreadyExistsException;
 import project.user.model.Sex;
@@ -47,6 +48,48 @@ public class UserServiceTest {
         user.setId(userId);
         user.setUsername("john_doe");
         user.setSex(Sex.MALE);
+        user.setEmail("test@test.com");
+        user.setPassword("testPASSWORD");
+    }
+
+    @Test
+    void create_WhenUsernameAndEmailIsUnique_ShouldReturnSavedUser() {
+        when(userRepository.existsByEmail("test@test.com")).thenReturn(false);
+        when(userRepository.existsByUsername("john_doe")).thenReturn(false);
+        when(userRepository.save(user)).thenReturn(user);
+
+        User createdUser = userService.create(user);
+
+        assertNotNull(createdUser);
+        assertNotNull(createdUser.getId());
+        assertNotNull(createdUser.getPassword());
+        assertEquals("john_doe", createdUser.getUsername());
+        assertEquals("test@test.com", createdUser.getEmail());
+
+        verify(userRepository, times(1)).existsByEmail("test@test.com");
+        verify(userRepository, times(1)).existsByUsername("john_doe");
+        verify(userRepository, times(1)).save(user);
+    }
+
+    @Test
+    void create_WhenUsernameExists_ShouldThrowException() {
+        when(userRepository.existsByUsername("john_doe")).thenReturn(true);
+        
+        assertThrows(UsernameAlreadyExistsException.class, () -> userService.create(user));
+
+        verify(userRepository, times(1)).existsByUsername("john_doe");
+        verify(userRepository, never()).save(user);
+    }
+
+    
+    @Test
+    void create_WhenEmailExists_ShouldThrowException() {
+        when(userRepository.existsByEmail("test@test.com")).thenReturn(true);
+        
+        assertThrows(EmailAlreadyExistsException.class, () -> userService.create(user));
+
+        verify(userRepository, times(1)).existsByEmail("test@test.com");
+        verify(userRepository, never()).save(user);
     }
 
     @Test
