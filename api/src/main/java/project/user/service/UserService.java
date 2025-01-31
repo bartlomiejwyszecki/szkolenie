@@ -24,7 +24,7 @@ public class UserService {
 
     public User create(User user)
     {
-        if (userRepository.existsByEmail(user.getUsername())) {
+        if (userRepository.existsByUsername(user.getUsername())) {
             throw new UsernameAlreadyExistsException(user.getUsername());
         }
 
