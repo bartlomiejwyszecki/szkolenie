@@ -21,6 +21,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public User create(User user)
+    {
+        if (userRepository.existsByEmail(user.getUsername())) {
+            throw new UsernameAlreadyExistsException(user.getUsername());
+        }
+
+        return userRepository.save(user);
+    }
+
     public List<User> getAll() {
         return this.userRepository.findAll();
     }
