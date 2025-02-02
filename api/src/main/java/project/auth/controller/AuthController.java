@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import project.auth.dto.AuthResponseDTO;
 import project.auth.dto.LoginDTO;
 import project.auth.dto.RegisterDTO;
@@ -18,6 +19,7 @@ import project.user.exception.UsernameAlreadyExistsException;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "Auth")
 public class AuthController {
     private final AuthService authService;
 
