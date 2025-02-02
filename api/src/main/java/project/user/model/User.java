@@ -50,7 +50,7 @@ public class User {
     @Column()
     private String surname;
 
-    @Column(name = "date_of_birth")
+    @Column(name = "date_of_birth", nullable = true)
     @Past()
     private LocalDate dateOfBirth;
 
