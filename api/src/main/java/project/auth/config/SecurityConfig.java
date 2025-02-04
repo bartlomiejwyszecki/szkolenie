@@ -33,7 +33,7 @@ public class SecurityConfig {
                     "/v3/api-docs/**",
                     "/swagger-resources/**",
                     "/webjars/**").permitAll()
-                .requestMatchers("/api/auth/**").permitAll().anyRequest().authenticated());
+                .requestMatchers("/api/**").permitAll().anyRequest().authenticated());
         
         return http.build();
     }
