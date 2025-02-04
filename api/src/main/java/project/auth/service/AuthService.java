@@ -43,7 +43,7 @@ public class AuthService {
 
     public String login(LoginDTO login) {
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
+            .authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
 
         return jwtUtil.generateToken(authentication.getName());
     }
