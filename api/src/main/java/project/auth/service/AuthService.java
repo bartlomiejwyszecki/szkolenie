@@ -42,8 +42,7 @@ public class AuthService {
     }
 
     public String login(LoginDTO login) {
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword()));
 
         return jwtUtil.generateToken(authentication.getName());
     }
