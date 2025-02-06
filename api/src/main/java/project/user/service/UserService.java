@@ -28,9 +28,9 @@ public class UserService {
             throw new UsernameAlreadyExistsException(user.getUsername());
         }
 
-        // if (userRepository.existsByEmail(user.getEmail())) {
-        //     throw new EmailAlreadyExistsException(user.getEmail());
-        // }
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new EmailAlreadyExistsException(user.getEmail());
+        }
 
         return userRepository.save(user);
     }
