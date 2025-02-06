@@ -15,26 +15,22 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@Profile("!local")
-public class SecurityConfig {
-    private final JwtAuthEntryPoint authEntryPoint;
+@Profile("local")
+public class LocalSecurityConfig {
+    private final JwtAuthEntryPoint jwtAuthEntryPoint;
 
-    public SecurityConfig(JwtAuthEntryPoint authEntryPoint) {
-        this.authEntryPoint = authEntryPoint;
+    public LocalSecurityConfig(JwtAuthEntryPoint jwtAuthEntryPoint) {
+        this.jwtAuthEntryPoint = jwtAuthEntryPoint;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
-            .exceptionHandling(exception -> exception.authenticationEntryPoint(authEntryPoint))
+            .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers( "/swagger-ui.html",
-                    "/swagger-ui/**",
-                    "/v3/api-docs/**",
-                    "/swagger-resources/**",
-                    "/webjars/**").permitAll());
+                .requestMatchers("/api/**").permitAll().anyRequest().authenticated());
         
         return http.build();
     }
