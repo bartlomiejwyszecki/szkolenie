@@ -18,9 +18,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (theme === "light") {
       setTheme("dark");
       document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
       localStorage.setItem("theme", "dark");
     } else {
       setTheme("light");
+      document.documentElement.classList.add("light");
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
