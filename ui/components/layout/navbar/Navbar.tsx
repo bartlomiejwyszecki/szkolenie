@@ -1,3 +1,5 @@
+import { ThemeToggler } from "components/components/common/ThemeToggler/ThemeToggler";
+
 const Navbar = () => {
   return (
     <nav className="fixed top-0 w-full h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -10,6 +12,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <div>user btn</div>
         </div>
+        <ThemeToggler />
       </div>
     </nav>
   );
