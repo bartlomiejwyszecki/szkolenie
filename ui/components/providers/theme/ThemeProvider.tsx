@@ -34,8 +34,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       .matches
       ? "dark"
       : "light";
-
     const initialTheme = localTheme || systemTheme;
+    
     setTheme(initialTheme);
 
     if (initialTheme === "dark") {
