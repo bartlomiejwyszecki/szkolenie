@@ -2,7 +2,7 @@
 
 import { UserIcon } from "@heroicons/react/24/outline";
 import { useState, useRef, useEffect } from "react";
-import { UserMenu } from "./UserMenu";
+import { UserMenu } from "../UserMenu/UserMenu";
 
 export const UserButton = () => {
   const [isOpen, setIsOpen] = useState(false);
