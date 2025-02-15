@@ -1,4 +1,5 @@
 import { ThemeToggler } from "components/components/common/ThemeToggler/ThemeToggler";
+import { UserButton } from "components/components/common/UserButton/UserButton";
 
 const Navbar = () => {
   return (
@@ -10,9 +11,9 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <div>user btn</div>
+          <UserButton />
+          <ThemeToggler />
         </div>
-        <ThemeToggler />
       </div>
     </nav>
   );
