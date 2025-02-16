@@ -11,7 +11,7 @@ export default function ClientLayout({
   return (
     <ThemeProvider>
       <Navbar />
-      <main className="py-24 mx-auto container">{children}</main>
+      <main className="py-24 px-4 mx-auto container">{children}</main>
     </ThemeProvider>
   );
 } 

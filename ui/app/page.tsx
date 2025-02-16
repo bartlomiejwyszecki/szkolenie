@@ -1,5 +1,5 @@
-export default function Home() {
-  return (
-    <h1>Welcome</h1>
-  );
+import { Home } from "components/features/home/Home";
+
+export default function HomePage() {
+  return <Home />;
 }
