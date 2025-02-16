@@ -13,12 +13,12 @@
   --background: #f8fafc;
   --text-primary: #020617;
   --navbar-bg: #ffffff;
-  --border-color: #e2e8f0;  /* light border */
+  --border-color: #e2e8f0;
 }
 
 .dark {
   --background: #0f172a;
   --text-primary: #f1f5f9;
   --navbar-bg: #0f172a;
-  --border-color: #334155;  /* darker border for dark mode */
+  --border-color: #334155; 
 }
