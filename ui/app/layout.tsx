@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./client-layout";
+import { APP_CONFIG } from "components/config/app";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -11,8 +12,8 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Your App Name",
-  description: "A more meaningful description of your application",
+  title: APP_CONFIG.name,
+  description: APP_CONFIG.description,
 };
 
 export default function RootLayout({
