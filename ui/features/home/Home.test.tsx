@@ -1,12 +1,13 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { Home } from "./Home";
+import { APP_CONFIG } from "components/config/app";
 
 describe("Home", () => {
-  it("renders the welcome heading", () => {
+  it("should render the welcome heading", () => {
     render(<Home />);
     const heading = screen.getByRole("heading", { 
-      name: /welcome to meme app/i,
+      name: `Welcome to ${APP_CONFIG.name}`,
       level: 1 
     });
     expect(heading).toBeInTheDocument();
