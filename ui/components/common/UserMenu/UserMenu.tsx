@@ -1,5 +1,6 @@
 'use client';
 
+import { MenuItemLink } from '../MenuItemLink/MenuItemLink';
 import { UserMenuItems } from './UserMenuItems';
 
 interface UserMenuProps {
@@ -14,7 +15,7 @@ export const UserMenu = ({ isOpen }: UserMenuProps) => {
       role="menu"
       className="absolute right-0 mt-2 w-48 py-2 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700"
     >
-      <UserMenuItems />
+      <MenuItemLink href="/login">Login or Sign up</MenuItemLink>
     </div>
   );
 }; 

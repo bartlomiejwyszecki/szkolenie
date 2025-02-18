@@ -1,11 +1,11 @@
 'use client';
 
-interface MenuItemProps {
+interface MenuItemButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
 }
 
-export const MenuItem = ({ children, onClick }: MenuItemProps) => {
+export const MenuItemButton = ({ children, onClick }: MenuItemButtonProps) => {
   return (
     <button 
       onClick={onClick}
