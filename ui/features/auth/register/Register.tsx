@@ -1,15 +1,15 @@
 'use client';
 
 import { APP_CONFIG } from 'components/config/app';
-import { LoginForm } from './LoginForm';
+import { RegisterForm } from './RegisterForm';
 
-export const Login = () => {
+export const Register = () => {
   return (
     <div className="w-full max-w-md">
       <h1 className="text-3xl font-semibold text-center mb-8">
-        Login to {APP_CONFIG.name}
+        Join {APP_CONFIG.name}
       </h1>
-      <LoginForm />
+      <RegisterForm />
     </div>
   );
 }; 
