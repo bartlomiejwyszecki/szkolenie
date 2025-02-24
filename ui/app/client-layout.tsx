@@ -13,7 +13,7 @@ export default function ClientLayout({
     <ThemeProvider>
       <Navbar />
       <main className="py-24 px-4 mx-auto container">{children}</main>
-      <Toaster position="bottom-center" />
+      <Toaster />
     </ThemeProvider>
   );
 } 
