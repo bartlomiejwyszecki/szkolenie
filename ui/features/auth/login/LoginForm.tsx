@@ -1,13 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { useLogin } from '../hooks/useLogin';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login, error, isLoading } = useLogin();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    await login({ email, password });
   };
 
   return (
@@ -16,6 +20,9 @@ export const LoginForm = () => {
       className="space-y-6"
       aria-label="Login form"
     >
+      {error && (
+        <div className="text-red-500 dark:text-red-400 text-sm">{error}</div>
+      )}
       <div>
         <label htmlFor="login-email" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
           Email
@@ -54,7 +61,7 @@ export const LoginForm = () => {
                  hover:bg-blue-700 transition-colors 
                  disabled:opacity-50 dark:bg-blue-500 dark:hover:bg-blue-600"
       >
-        Log in
+        {isLoading ? 'Logging in...' : 'Log in'}
       </button>
     </form>
   );
