@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { authHttpService } from '../services/authHttpService';
-import { RegisterRequest } from '../models/register-request.interface';
 import { LoginRequest } from '../models/auth-response.interface';
 
 interface UseLoginReturn {
