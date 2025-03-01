@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
-import { AuthLayout } from './AuthLayout';
-import { Login } from './login/Login';
-import { Register } from './register/Register';
+import { Link } from "components/components/ui/Link/Link";
+import { AuthLayout } from "./AuthLayout";
+import { Login } from "./login/Login";
 
 export const Auth = () => {
   return (
     <AuthLayout>
       <Login />
-      <Register />
+      <span>
+        Don&apos;t have an account yet? Please{" "}
+        <Link href="/register">click to Sign up</Link>.
+      </span>
     </AuthLayout>
   );
-}; 
+};
