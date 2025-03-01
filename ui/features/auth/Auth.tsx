@@ -8,7 +8,6 @@ export const Auth = () => {
   return (
     <AuthLayout>
       <Login />
-      <Register />
     </AuthLayout>
   );
 }; 
