@@ -57,4 +57,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column()
     private Sex sex;
+    
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean verified = false;
+
+    @Column(unique = true)
+    private String verificationCode; 
 }
