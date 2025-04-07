@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/email")
-@Tag(name = "Auth")
+@Tag(name = "Email")
 public class EmailController {
     private final EmailService emailService;
 
