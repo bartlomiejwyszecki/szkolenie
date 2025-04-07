@@ -3,6 +3,7 @@ package project.email.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,8 +28,16 @@ public class EmailController {
         this.emailService = emailService;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> sendEmail(@RequestBody SendEmailDTO email) {
-        return emailService.se
+    @PostMapping("/send")
+    public ResponseEntity<?> sendEmail(@RequestBody SendEmailDTO body) {
+        try {
+            emailService.sendEmail(body.getEmail(), body.getSubject(), body.getText());
+
+            return ResponseEntity.ok("Email sent successfully.");
+        } catch (MailException e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to send email: " + e.getMessage());
+        }
     }
 }
