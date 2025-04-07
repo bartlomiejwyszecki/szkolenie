@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import project.email.EmailService;
+import project.email.dto.SendEmailDTO;
 import project.employee.dto.CreateEmployeeDTO;
 import project.employee.model.Employee;
 import project.employee.service.EmployeeService;
@@ -28,5 +29,6 @@ public class EmailController {
 
     @PostMapping
     public ResponseEntity<Void> sendEmail(@RequestBody SendEmailDTO email) {
+        return emailService.se
     }
 }
