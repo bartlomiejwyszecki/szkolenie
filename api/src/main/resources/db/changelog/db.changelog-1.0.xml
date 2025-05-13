@@ -16,4 +16,11 @@
         <dropColumn columnName="verification_code" tableName="users"/>
     </changeSet>
 
+    <changeSet id="3" author="bwysz">
+        <addColumn tableName="users">
+            <column name="status" type="varchar(50)" defaultValue="PENDING_VERIFICATION">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
