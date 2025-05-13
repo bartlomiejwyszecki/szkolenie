@@ -5,13 +5,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import project.auth.model.VerificationToken;
 import project.auth.repository.VerificationTokenRepository;
+import project.user.model.User;
+import project.user.model.UserStatus;
+import project.user.service.UserService;
 
 @Service
 public class VerificationTokenService {
     private final VerificationTokenRepository tokenRepository;
+    private final UserService userService;
 
-    public VerificationTokenService(VerificationTokenRepository tokenRepository) {
+    public VerificationTokenService(VerificationTokenRepository tokenRepository, UserService userService) {
         this.tokenRepository = tokenRepository;
+        this.userService = userService;
     }
 
     public void save(VerificationToken token) {
@@ -29,5 +34,9 @@ public class VerificationTokenService {
         if (verificationToken.getExpiryDate().isBefore(java.time.Instant.now())) {
             throw new IllegalStateException("Token expired");
         }
+
+        User user = verificationToken.getUser();
+        
+        userService.updateUserStatus(user.getId(), UserStatus.ACTIVE);
     }
 }

@@ -11,6 +11,7 @@ import project.user.exception.EmailAlreadyExistsException;
 import project.user.exception.UserNotFoundException;
 import project.user.exception.UsernameAlreadyExistsException;
 import project.user.model.User;
+import project.user.model.UserStatus;
 import project.user.repository.UserRepository;
 
 @Service
@@ -59,6 +60,14 @@ public class UserService {
         }
 
         return userRepository.save(existingUser);
+    }
+
+    public User updateUserStatus(UUID id, UserStatus status) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setStatus(status);
+
+        return userRepository.save(user);
     }
 
     public boolean delete(UUID id) {

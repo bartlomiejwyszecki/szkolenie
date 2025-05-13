@@ -1,5 +1,8 @@
 package project.user.model;
 
-public class UserStatus {
-
+public enum UserStatus {
+    PENDING_VERIFICATION,
+    ACTIVE,
+    SUSPENDED,
+    REMOVED
 }

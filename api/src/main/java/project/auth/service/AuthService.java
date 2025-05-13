@@ -19,16 +19,19 @@ import project.user.service.UserService;
 @Service
 public class AuthService {
     private final UserService userService;
+    private final VerificationTokenService tokenService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
     public AuthService(
             UserService userService,
+            VerificationTokenService tokenService,
             PasswordEncoder passwordEncoder,
             AuthenticationManager authenticationManager,
             JwtUtil jwtUtil) {
         this.userService = userService;
+        this.tokenService = tokenService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
@@ -50,6 +53,8 @@ public class AuthService {
             .user(user)
             .expiryDate(Instant.now().plusSeconds(60 * 60 * 24))
             .build();
+
+        tokenService.save(verificationToken);
     }
 
     public String login(LoginDTO login) {
