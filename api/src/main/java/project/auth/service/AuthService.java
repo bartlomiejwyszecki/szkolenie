@@ -1,5 +1,7 @@
 package project.auth.service;
 
+import java.time.Instant;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import project.auth.config.JwtUtil;
 import project.auth.dto.LoginDTO;
 import project.auth.dto.RegisterDTO;
+import project.auth.model.VerificationToken;
 import project.user.model.Role;
 import project.user.model.User;
 import project.user.service.UserService;
@@ -32,13 +35,21 @@ public class AuthService {
     }
 
     public void register(RegisterDTO registerDTO) {
-        User user = new User();
-
-        user.setEmail(registerDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-        user.setRole(Role.USER);
+        User user = User.builder()
+            .email(registerDTO.getEmail())
+            .password(passwordEncoder.encode(registerDTO.getPassword()))
+            .role(Role.USER)
+            .build();
 
         userService.create(user);
+
+        String token = java.util.UUID.randomUUID().toString();
+
+        VerificationToken verificationToken = VerificationToken.builder()
+            .token(token)
+            .user(user)
+            .expiryDate(Instant.now().plusSeconds(60 * 60 * 24))
+            .build();
     }
 
     public String login(LoginDTO login) {
