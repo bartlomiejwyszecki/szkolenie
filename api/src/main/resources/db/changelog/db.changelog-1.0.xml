@@ -11,9 +11,9 @@
         <dropNotNullConstraint tableName="users" columnName="date_of_birth" columnDataType="DATE"/>
     </changeSet>
 
-    <changeSet id="2" author="yourname">
-        <dropColumn columnName="verified" tableName="users"/>
-        <dropColumn columnName="verificationCode" tableName="users"/>
+    <changeSet id="2" author="bwysz">
+        <dropColumn columnName="username" tableName="users"/>
+        <dropColumn columnName="verification_code" tableName="users"/>
     </changeSet>
 
 </databaseChangeLog>
