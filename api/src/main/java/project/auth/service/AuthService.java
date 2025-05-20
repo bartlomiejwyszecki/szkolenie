@@ -12,6 +12,7 @@ import project.auth.config.JwtUtil;
 import project.auth.dto.LoginDTO;
 import project.auth.dto.RegisterDTO;
 import project.auth.model.VerificationToken;
+import project.email.EmailService;
 import project.user.model.Role;
 import project.user.model.User;
 import project.user.service.UserService;
@@ -23,18 +24,21 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final EmailService emailService;
 
     public AuthService(
             UserService userService,
             VerificationTokenService tokenService,
             PasswordEncoder passwordEncoder,
             AuthenticationManager authenticationManager,
-            JwtUtil jwtUtil) {
+            JwtUtil jwtUtil,
+            EmailService emailService) {
         this.userService = userService;
         this.tokenService = tokenService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
+        this.emailService = emailService;
     }
 
     public void register(RegisterDTO registerDTO) {
@@ -55,6 +59,10 @@ public class AuthService {
             .build();
 
         tokenService.save(verificationToken);
+
+        String link = "fake-link.com/verify?token=" + token;
+
+        emailService.sendConfirmationCode(user.getEmail(), link);
     }
 
     public String login(LoginDTO login) {
