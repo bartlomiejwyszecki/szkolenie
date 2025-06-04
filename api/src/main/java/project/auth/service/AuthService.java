@@ -15,6 +15,7 @@ import project.auth.model.VerificationToken;
 import project.email.EmailService;
 import project.user.model.Role;
 import project.user.model.User;
+import project.user.model.UserStatus;
 import project.user.service.UserService;
 
 @Service
@@ -46,6 +47,7 @@ public class AuthService {
             .email(registerDTO.getEmail())
             .password(passwordEncoder.encode(registerDTO.getPassword()))
             .role(Role.USER)
+            .status(UserStatus.PENDING_VERIFICATION)
             .build();
 
         userService.create(user);
